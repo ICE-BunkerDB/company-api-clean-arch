@@ -2,11 +2,31 @@
   "name": "company-api-clean-arch",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/main/server.js",
   "scripts": {
+    "build": "rimraf dist && tsc -p tsconfig-build.json",
+    "build:watch": "npm run build -- --watch",
+    "dev": "node -L --watch ./dist ./dist/main/server.js",
+    "start:dev": "concurrently --kill-others-on-fail \"npm run build:watch\" \"npm run dev\" ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.8.10",
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.0.1",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "module-alias": "^2.2.3"
+  },
+  "_moduleAliases": {
+    "@domain": "dist/domain",
+    "@application": "dist/application",
+    "@infrastructure": "dist/infrastructure",
+    "@main": "dist/main"
+  }
 }
